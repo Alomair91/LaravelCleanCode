@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SOLID\SR;
+namespace App\Http\Controllers\SOLID\SingleResponsibility;
 
 class HtmlOutput implements SalesOutputInterface
 {

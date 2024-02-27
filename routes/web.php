@@ -13,10 +13,15 @@
 |
 */
 
+use App\Http\Controllers\SOLID\DependencyInversion\DbConnection;
+use App\Http\Controllers\SOLID\DependencyInversion\PasswordReminder;
+use App\Http\Controllers\SOLID\InterfaceSegregation\ManageWoker\HumanWorker;
+use App\Http\Controllers\SOLID\InterfaceSegregation\ManageWoker\ManageWorker;
+use App\Http\Controllers\SOLID\LiskovSubstitution\FileLessonRepository;
+use App\Http\Controllers\SOLID\LiskovSubstitution\LiskovSubstitution3;
 use App\Http\Controllers\SOLID\OpenClosed\AreaCalculator\AreCalculator;
 use App\Http\Controllers\SOLID\OpenClosed\AreaCalculator\Circle;
 use App\Http\Controllers\SOLID\OpenClosed\AreaCalculator\Square;
-use App\Http\Controllers\SOLID\OpenClosed\Checkout\CashPaymentMethod;
 use App\Http\Controllers\SOLID\OpenClosed\Checkout\Checkout;
 use App\Http\Controllers\SOLID\OpenClosed\Checkout\PayPalPaymentMethod;
 use App\Http\Controllers\SOLID\OpenClosed\Checkout\Receipt;
@@ -47,4 +52,22 @@ $router->get('solid/open-closed/calculator', function () {
 $router->get('solid/open-closed/checkout', function () {
     $checkout = new Checkout();
     return $checkout->begin(new Receipt(40), new PayPalPaymentMethod());
+});
+
+// Liskov Substitution: Derived classes must be substitutable for their base classes.
+/**
+ * 1. Signature must match
+ * 2. Preconditions can't be greater
+ * 3. Post conditions at least equal to
+ * 4. Exception types must match
+ */
+$router->get('solid/liskov-substitution', function () {
+    $report = new LiskovSubstitution3();
+    return $report->foo(new FileLessonRepository());
+});
+
+// 4. Interface Segregation: A client should not be forced to implement interface that it doesn't use.
+$router->get('solid/interface-segregation', function () {
+    $worker = new ManageWorker();
+    return $worker->manage(new HumanWorker());
 });

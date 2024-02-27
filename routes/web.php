@@ -71,3 +71,15 @@ $router->get('solid/interface-segregation', function () {
     $worker = new ManageWorker();
     return $worker->manage(new HumanWorker());
 });
+
+// 5. Dependency Inversion: Depend on abstractions, not on concretions.
+/**
+ * High level code should never have to depend on low level code (One class should never be forced to depend on
+ * a specific implementation instead it should depend on a contract or an abstractions or an interface )
+ * - High level code: isn't as concerned with details
+ * - Low level code: is more concerned with details and specifics
+ */
+$router->get('solid/dependency-inversion', function () {
+    $reminder = new PasswordReminder(new DbConnection());
+    return $reminder->reset();
+});

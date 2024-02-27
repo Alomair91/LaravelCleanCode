@@ -17,11 +17,21 @@ class DesignPatternsRouter
     public function begin(): void
     {
         $this->decoratorPattern();
+        $this->adapterPattern();
     }
 
     public function decoratorPattern()
     {
-        $this->router->get('design-patterns/decorator-pattern/car-service', function () {
+        $this->router->get('design-patterns/decorator/car-service', function () {
+            $service = new CarService();
+            return $service->begin();
+        });
+    }
+
+    // Adapter Pattern: An adapter allow us to translate one interface for use with another
+    public function adapterPattern()
+    {
+        $this->router->get('design-patterns/adapter/car-service', function () {
             $service = new CarService();
             return $service->begin();
         });

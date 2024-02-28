@@ -6,7 +6,7 @@ class PersonReader
 {
     public function read(BookInterface $book)
     {
-
+        return $book->open();
     }
 
 }

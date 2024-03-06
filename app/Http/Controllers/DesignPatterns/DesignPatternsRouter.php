@@ -8,6 +8,8 @@ use App\Http\Controllers\DesignPatterns\AdapterPattern\KindleAdapter;
 use App\Http\Controllers\DesignPatterns\AdapterPattern\Nook;
 use App\Http\Controllers\DesignPatterns\AdapterPattern\PersonReader;
 use App\Http\Controllers\DesignPatterns\DecoratorPattern\CarService;
+use App\Http\Controllers\DesignPatterns\TemplateMethodPattern\TurkeySub;
+use App\Http\Controllers\DesignPatterns\TemplateMethodPattern\VeggieSub;
 use Laravel\Lumen\Routing\Router;
 
 class DesignPatternsRouter
@@ -23,6 +25,7 @@ class DesignPatternsRouter
     {
         $this->decoratorPattern();
         $this->adapterPattern();
+        $this->templateMethodPattern();
     }
 
     public function decoratorPattern()
@@ -41,6 +44,18 @@ class DesignPatternsRouter
 //            return $service->read(new Book);
 //            return $service->read(new KindleAdapter(new Kindle));
             return $service->read(new KindleAdapter(new Nook));
+        });
+    }
+
+    // Have public interface but subclasses are not allowed to change how these works
+    public function templateMethodPattern()
+    {
+        $this->router->get('design-patterns/template-method', function () {
+//            return (new TurkeySub())->make();
+            return [
+                "TurkeySub" => (new TurkeySub())->make(),
+                "VeggieSub" => (new VeggieSub())->make(),
+            ];
         });
     }
 }

@@ -63,7 +63,7 @@ class SolidRouter
     {
 
         $this->router->get('solid/open-closed/calculator', function () {
-            $calculator = new AreCalculator(new SalesRepository());
+            $calculator = new AreCalculator();
             return $calculator->calculate([new Square(20, 30), new Circle(50)]);
         });
         $this->router->get('solid/open-closed/checkout', function () {
